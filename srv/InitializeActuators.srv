@@ -1,0 +1,7 @@
+uint8 id
+uint32 baud
+uint16 zero_pos
+uint16 cw_limit
+uint16 ccw_limit
+---
+uint8 status

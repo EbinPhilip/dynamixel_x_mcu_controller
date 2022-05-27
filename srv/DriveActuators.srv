@@ -1,0 +1,6 @@
+uint16 position
+uint16 speed
+---
+uint16 position
+uint16 speed
+int16 effort
