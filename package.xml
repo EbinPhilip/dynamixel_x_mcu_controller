@@ -34,6 +34,7 @@
   <!-- Use depend as a shortcut for packages that are both build and exec dependencies -->
     <depend>roscpp</depend>
     <depend>rospy</depend>
+    <depend>std_msgs</depend>
   <!--   Note that this is equivalent to the following: -->
   <!--   <build_depend>roscpp</build_depend> -->
   <!--   <exec_depend>roscpp</exec_depend> -->
@@ -51,10 +52,14 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
 
+  <depend>configurable_control_hw</depend>
+  <depend>dynamixel_x_controller</depend>
+  <depend>rotational_units</depend>
+  <depend>pluginlib</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <!-- Other tools can request additional information be placed here -->
-
+    <dynamixel_x_mcu_controller plugin="${prefix}/plugins.xml"/>
   </export>
 </package>

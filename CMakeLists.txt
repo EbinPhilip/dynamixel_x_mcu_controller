@@ -11,7 +11,11 @@ find_package(catkin REQUIRED COMPONENTS
     roscpp
     rospy
     std_msgs
-    message_generation)
+    message_generation
+    configurable_control_hw
+    dynamixel_x_controller
+    rotational_units
+    pluginlib)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -105,8 +109,16 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
     INCLUDE_DIRS include/dynamixel_x_mcu_controller
-    #  LIBRARIES dynamixel_x_mcu_controller
-    CATKIN_DEPENDS message_runtime
+    LIBRARIES dynamixel_x_mcu_controller
+    CATKIN_DEPENDS
+      message_runtime
+      std_msgs
+      roscpp
+      rospy
+      dynamixel_x_controller
+      configurable_control_hw
+      rotational_units
+      pluginlib
     #  DEPENDS system_lib
 )
 
@@ -122,9 +134,23 @@ include_directories(
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/dynamixel_x_mcu_controller.cpp
-# )
+add_library(dynamixel_x_mcu_controller
+  src/DynamixelXMcuController.cpp
+  src/DynamixelXMcuActuatorConfigParser.cpp
+  src/DynamixelXMcuControllerConfigParser
+)
+
+target_link_libraries(dynamixel_x_mcu_controller
+  ${catkin_LIBRARIES}
+)
+
+add_executable(dynamixel_x_mcu_controller_example
+  src/Example.cpp
+)
+target_link_libraries(dynamixel_x_mcu_controller_example
+  dynamixel_x_mcu_controller
+  ${catkin_LIBRARIES}
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
