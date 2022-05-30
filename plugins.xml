@@ -1,0 +1,8 @@
+<library path="lib/libdynamixel_x_mcu_controller">
+    <class type="DynamixelXMcu::ControllerConfigParser" base_class_type="Actuator_Config_Parser">
+        <description>Plugin for parsing dynamixel x mcu actuator config.</description>
+    </class>
+    <class type="DynamixelXMcu::ActuatorConfigParser" base_class_type="Actuator_Config_Parser">
+        <description>Plugin for parsing dynamixel x mcu actuator config.</description>
+    </class>
+</library>
