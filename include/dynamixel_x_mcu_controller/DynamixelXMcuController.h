@@ -1,5 +1,5 @@
-#ifndef __LINEAR_ACTUATOR_CONTROLLER_H__
-#define __LINEAR_ACTUATOR_CONTROLLER_H__
+#ifndef __DYNAMIXEL_X_MCU_CONTROLLER_H__
+#define __DYNAMIXEL_X_MCU_CONTROLLER_H__
 
 #include <configurable_control_hw/Actuator_Controller.h>
 #include "dynamixel_x_controller/Dynamixel_X_Actuator_Properties.h"

@@ -79,7 +79,9 @@ void Controller::setActuator(Dynamixel_X::Actuator_Properties_Ptr actuator)
     init_msg.request.zero_pos = (uint16_t) Dynamixel_X::Pos_Unit(
             actuator_->zero_deg).Value();
     
-    if (!initialize_service_.call(init_msg) || init_msg.response.status!=0)
+    bool success = initialize_service_.call(init_msg);
+    
+    if (!success || init_msg.response.status!=0)
     {
         ROS_ERROR("%s: initialize failed", actuator_->actuator_name.c_str());
         stop_flag_ = true;
@@ -143,12 +145,14 @@ void Controller::enableActuators()
 {
     EnableActuators enable;
     enable.request.enable = true;
-    bool error = enable_service_.call(enable);
+    bool success = enable_service_.call(enable);
 
-    if (error || enable.response.status!=0)
+    if (!success || enable.response.status!=0)
     {
-        ROS_ERROR("%s: unexpected error, enable failed", actuator_->actuator_name);
+        ROS_ERROR("%s: unexpected error, enable failed", actuator_->actuator_name.c_str());
         stop_flag_ = true;
+        error_status_ = true;
+        error_msg_ = "enable failed";
     }
     else
     {
@@ -160,9 +164,9 @@ void Controller::disableActuators()
 {
     EnableActuators enable;
     enable.request.enable = false;
-    bool error = enable_service_.call(enable);
+    bool success = enable_service_.call(enable);
 
-    if (error || enable.response.status!=0)
+    if (!success || enable.response.status!=0)
     {
         ROS_ERROR("%s: unexpected error, disable failed", actuator_->actuator_name.c_str());
     }
